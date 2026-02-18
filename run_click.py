@@ -60,7 +60,7 @@ def bootstrap(ctx):
     if ctx.obj["dry_run"]:
         LOG.info("(dry-run) would run: bootstrap.run()")
     else:
-        call_and_handle("bootstrap", "run")
+        call_and_handle("tools.bootstrap", "run")
 
 
 @cli.command()
@@ -69,7 +69,7 @@ def validate(ctx):
     if ctx.obj["dry_run"]:
         LOG.info("(dry-run) would run: validators.run_all()")
     else:
-        call_and_handle("validators", "run_all")
+        call_and_handle("tools.validators", "run_all")
 
 
 @cli.command()
@@ -82,9 +82,9 @@ def generate(ctx, season: int, episode: int):
         LOG.info("(dry-run) would run: artbrief_gen.generate(%s, %s)", season, episode)
         LOG.info("(dry-run) would run: prompt_gen.generate(%s, %s)", season, episode)
     else:
-        call_and_handle("episode_gen", "generate", season, episode)
-        call_and_handle("artbrief_gen", "generate", season, episode)
-        call_and_handle("prompt_gen", "generate", season, episode)
+        call_and_handle("tools.episode_gen", "generate", season, episode)
+        call_and_handle("tools.artbrief_gen", "generate", season, episode)
+        call_and_handle("tools.prompt_gen", "generate", season, episode)
 
 
 @cli.command()
@@ -95,7 +95,7 @@ def imagine(ctx, season: int, episode: int):
     if ctx.obj["dry_run"]:
         LOG.info("(dry-run) would run: imagine_api.run_batch(%s, %s)", season, episode)
     else:
-        call_and_handle("imagine_api", "run_batch", season, episode)
+        call_and_handle("tools.imagine_api", "run_batch", season, episode)
 
 
 @cli.command()
@@ -106,7 +106,7 @@ def postprocess(ctx, season: int, episode: int):
     if ctx.obj["dry_run"]:
         LOG.info("(dry-run) would run: asset_tools.postprocess(%s, %s)", season, episode)
     else:
-        call_and_handle("asset_tools", "postprocess", season, episode)
+        call_and_handle("tools.asset_tools", "postprocess", season, episode)
 
 
 @cli.command()
@@ -117,7 +117,7 @@ def build(ctx, target: str):
         if ctx.obj["dry_run"]:
             LOG.info("(dry-run) would run: unity.build_ios()")
         else:
-            call_and_handle("unity", "build_ios")
+            call_and_handle("tools.unity", "build_ios")
     else:
         raise click.UsageError("unsupported build target")
 
@@ -135,14 +135,14 @@ def runall(ctx):
         LOG.info("(dry-run) would run: asset_tools.postprocess(1, 1)")
         LOG.info("(dry-run) would run: unity.build_ios()")
     else:
-        call_and_handle("bootstrap", "run")
-        call_and_handle("validators", "run_all")
-        call_and_handle("episode_gen", "generate", 1, 1)
-        call_and_handle("artbrief_gen", "generate", 1, 1)
-        call_and_handle("prompt_gen", "generate", 1, 1)
-        call_and_handle("imagine_api", "run_batch", 1, 1)
-        call_and_handle("asset_tools", "postprocess", 1, 1)
-        call_and_handle("unity", "build_ios")
+        call_and_handle("tools.bootstrap", "run")
+        call_and_handle("tools.validators", "run_all")
+        call_and_handle("tools.episode_gen", "generate", 1, 1)
+        call_and_handle("tools.artbrief_gen", "generate", 1, 1)
+        call_and_handle("tools.prompt_gen", "generate", 1, 1)
+        call_and_handle("tools.imagine_api", "run_batch", 1, 1)
+        call_and_handle("tools.asset_tools", "postprocess", 1, 1)
+        call_and_handle("tools.unity", "build_ios")
 
 
 def main(argv: list[str] | None = None) -> int:

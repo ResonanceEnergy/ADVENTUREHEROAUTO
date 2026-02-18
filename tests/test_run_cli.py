@@ -39,7 +39,8 @@ def test_generate_dry_run_logs_all_steps(capsys):
 
 
 def test_validate_executes_validators_module(capsys):
-    import importlib, validators
+    import importlib
+    from tools import validators
     importlib.reload(validators)
     validators.called = False
 
@@ -51,7 +52,8 @@ def test_validate_executes_validators_module(capsys):
 
 
 def test_generate_executes_all_modules(capsys):
-    import importlib, episode_gen, artbrief_gen, prompt_gen
+    import importlib
+    from tools import episode_gen, artbrief_gen, prompt_gen
     importlib.reload(episode_gen)
     importlib.reload(artbrief_gen)
     importlib.reload(prompt_gen)
@@ -68,7 +70,8 @@ def test_generate_executes_all_modules(capsys):
 
 
 def test_runall_executes_everything(capsys):
-    import importlib, bootstrap, validators, episode_gen, artbrief_gen, prompt_gen, imagine_api, asset_tools, unity
+    import importlib
+    from tools import bootstrap, validators, episode_gen, artbrief_gen, prompt_gen, imagine_api, asset_tools, unity
     for m in (bootstrap, validators, episode_gen, artbrief_gen, prompt_gen, imagine_api, asset_tools, unity):
         importlib.reload(m)
 
